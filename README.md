@@ -5,7 +5,7 @@
 #### Description:
 The projects mainly rely on the library discord.py (https://discordpy.readthedocs.io/en/stable/)
 
-The main.py makes the bot runs and connect all the other commands together. It also allows load, unload and reload of all the commands except for ping and clear. These are for updating the command without restarting the bot entirely. Inside it, there are also a clear and ping command. Ping command (i.e. “.ping”) is for user to check how fast the bot response to the user. The clear command (i.e. “.clear”) lets the user delete an amount of messages within the channel they are in. The 
+The main.py makes the bot runs and connect all the other commands together. It also allows load, unload and reload of all the commands except for ping and clear. These are for updating the command without restarting the bot entirely. Inside it, there are also a clear and ping command. Ping command (i.e. “.ping”) is for user to check how fast the bot response to the user. The clear command (i.e. “.clear”) lets the user delete an amount of messages within the channel they are in.
 
 According to the documentation of the library
 > There comes a point in your bot’s development when you want to organize a collection of commands, listeners, and some state into one class. Cogs allow you to do just that.
