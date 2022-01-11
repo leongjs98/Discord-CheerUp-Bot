@@ -3,6 +3,7 @@ import json
 from discord.ext import commands
 
 
+# For a cog to work
 class Dog(commands.Cog):
     def __init__(self, client):
         self.client = client

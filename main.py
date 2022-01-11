@@ -16,6 +16,7 @@ async def on_ready():
     print("Logged in as {0.user}".format(client))
 
 
+# Load, unload and reload are mainly for updating commands in different cogs mainly
 @client.command()
 @commands.check(is_guild_owner)
 async def load(ctx, extension):
@@ -50,6 +51,7 @@ for filename in os.listdir("./cogs"):
         client.load_extension(f"cogs.{filename[:-3]}")
 
 
+# A simple and short ping function
 @client.command(aliases=['p'])
 async def ping(ctx):
     """ Command: .ping\n
@@ -60,7 +62,7 @@ async def ping(ctx):
         f"{ctx.author.mention} Pong! `{round(client.latency * 1000)}ms`")
 
 
-# A command for deleting channel messages
+# A command for server owner to delete channel messages
 @client.command()
 @commands.check(is_guild_owner)
 async def clear(ctx, amount=1):

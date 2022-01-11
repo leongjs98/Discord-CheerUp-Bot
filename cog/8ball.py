@@ -2,6 +2,7 @@ from discord.ext import commands
 import random
 
 
+# For a cog to work
 class _8ball(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -18,6 +19,7 @@ def setup(client):
     client.add_cog(_8ball(client))
 
 
+# Random responses
 responses = [
     "It is certain.", 
     "It is decidedly so.", 

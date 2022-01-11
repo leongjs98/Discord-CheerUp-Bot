@@ -5,6 +5,7 @@ from discord.ext import commands
 from discord import Embed
 
 
+# For a cog to work
 class Urban_dictionary(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -27,6 +28,7 @@ class Urban_dictionary(commands.Cog):
         thumbs_up = str(ud_display["thumbs_up"]) + ":thumbsup:"
         author = ud_display["author"]
 
+        # Embed the information into a message
         embed = Embed(title="Urban Dictionary: "+term.capitalize(), url=permalink, description=thumbs_up, color=0x1f1fe2)
         embed.set_thumbnail(url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.Yl8QBHEgN648bPyHoboAoAHaHa%26pid%3DApi&f=1")
         embed.set_author(name=author)

@@ -6,6 +6,7 @@ from discord.ext import commands
 from discord import Embed
 
 
+# For a cog to work
 class Pokemon(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -17,6 +18,7 @@ class Pokemon(commands.Cog):
             If <name/Pokédex_number> is left out, a random pokemon is shown\n
             The default language is in English"""
 
+        # Getting the information from the API
         if name == None:
             # Search for a random Pokemon
             # only 898 Pokemon as of 10 Oct 2021
@@ -40,6 +42,7 @@ class Pokemon(commands.Cog):
 
         evolution_chain = get_evolution_chain(str(json_data["id"]))
 
+        # Embedding the information
         embed = Embed(title=name + name_in_other_language, description=description)
 
         embed.set_thumbnail(url=image)
@@ -47,6 +50,7 @@ class Pokemon(commands.Cog):
         embed.add_field(name="Pokédex Number", value=pokedex_num)
         embed.add_field(name="Evolution Chain", value=evolution_chain, inline=False)
 
+        # Send the embedded message out
         await ctx.send(embed=embed)
 
 
@@ -54,12 +58,14 @@ def setup(client):
     client.add_cog(Pokemon(client))
 
 
+# The main function for API call
 def get_pokemon(query):
     response = requests.get("https://pokeapi.co/api/v2/pokemon/" + query)
     json_data = json.loads(response.text)
-    return json_data  # return the image link
+    return json_data
 
 
+# Get the Pokemon types
 def get_types(json_data):
     for i in range(len(json_data["types"])):
         if i == 0:
@@ -71,6 +77,7 @@ def get_types(json_data):
     return types
 
 
+# Get the Pokemon description
 def get_description(id, language):
     response = requests.get(f"https://pokeapi.co/api/v2/pokemon-species/{id}/",id)
     json_data = json.loads(response.text)
@@ -80,6 +87,7 @@ def get_description(id, language):
             return i["flavor_text"].replace("\n", ' ')
 
 
+# Convert number like '9' to '#009'
 def format_pokedex_num(id):
     id_str = str(id)
 
@@ -89,6 +97,7 @@ def format_pokedex_num(id):
     return '#' + id_str
 
 
+# Get the pokemon evolution chain
 def get_evolution_chain(id):
     # Get evolution chain url
     response_species = requests.get(f"https://pokeapi.co/api/v2/pokemon-species/{id}/",id)
@@ -100,6 +109,7 @@ def get_evolution_chain(id):
 
     chain_ptr = json_data["chain"]
     chain = chain_ptr["species"]["name"].capitalize() # First 
+    
     # If there is a next evolution
     while 1:
       if chain_ptr["evolves_to"]: # If there is a next evolution
@@ -126,6 +136,7 @@ def get_name_in_other_lan(id, language):
         return ' (' + i["name"] + ')'
 
 
+# The API call can return name in different language, but he ISO langueage code is required.
 def get_language_iso(language):
   if language not in language_dict:
     return language

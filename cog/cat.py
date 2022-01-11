@@ -6,6 +6,7 @@ from discord import Embed
 from discord.ext import commands
 
 
+# For a cog to work
 class Cat(commands.Cog):
     def __init__(self, client):
         self.client = client
@@ -22,16 +23,19 @@ class Cat(commands.Cog):
         json_cat = get_cat()
         image_link = json_cat[0]["url"]
 
+        # A random breed
         if random_breed:
             json_cat = random.choice(get_cat_breed())
             image_link = json_cat["image"]["url"]
 
+            # Save the wanted information
             name = json_cat["name"]
             description = json_cat["description"]
             origin = json_cat["origin"]
             temperament = json_cat["temperament"]
             life_span = json_cat["life_span"] + " years"
-
+            
+            # Embed the information into a message
             embed = Embed(title=name, description=description, color=0x5b453e)
             embed.set_thumbnail(url=image_link)
             embed.add_field(name="Origin", value=origin)
@@ -41,6 +45,8 @@ class Cat(commands.Cog):
                             inline=False)
 
             await ctx.send(embed=embed)
+        
+        # Just a cat picture
         else:
             await ctx.send(image_link)
 
